@@ -55,16 +55,35 @@ public class NewsAdapter extends ArrayAdapter<News>{
             timeView.setText(time);
 
 
-            //URL
-            TextView urlView = (TextView) listItemView.findViewById(R.id.url);
-            String url = currentNews.getmUrl();
-            urlView.setText(url);
-
             //SECTION
             TextView sectionView = (TextView) listItemView.findViewById(R.id.section);
             String section = currentNews.getmSectionName();
             sectionView.setText(section);
+            //SECTION COLOUR ACCORDING TO SECTION
+            GradientDrawable sectionBubble = (GradientDrawable) sectionView.getBackground();
+            int sectionColor = getSectionColor(currentNews.getmSectionName());
+            sectionBubble.setColor(sectionColor);
 
             return listItemView;
+        }
+
+        private int getSectionColor(String sectionName){
+            int sectionColorResourceId;
+            String section = sectionName.toLowerCase();
+            switch (section){
+                case "business" :
+                    sectionColorResourceId = R.color.news1;
+                    break;
+                case "environment":
+                    sectionColorResourceId = R.color.news2;
+                    break;
+                case "money":
+                    sectionColorResourceId = R.color.news3;
+                    break;
+                default:
+                    sectionColorResourceId = R.color.newsdefault;
+                    break;
+            }
+            return ContextCompat.getColor(getContext(), sectionColorResourceId);
         }
 }

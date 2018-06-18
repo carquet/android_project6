@@ -9,52 +9,52 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="194dp"
-        android:layout_height="45dp"
-        android:layout_marginEnd="176dp"
-        android:layout_marginRight="176dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="160dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="120dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:text="Title"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/time"
-        android:layout_width="187dp"
-        android:layout_height="86dp"
-        android:layout_marginEnd="180dp"
-        android:layout_marginRight="180dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="148dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="12dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
         android:id="@+id/url"
         android:layout_width="74dp"
-        android:layout_height="35dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="124dp"
+        android:layout_height="51dp"
+        android:layout_marginLeft="304dp"
+        android:layout_marginStart="304dp"
+        android:layout_marginTop="96dp"
         android:text="more"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/section" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/section"
-        android:layout_width="77dp"
-        android:layout_height="25dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="308dp"
+        android:layout_marginRight="308dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/tag_bubble"
+        android:gravity="center"
         android:text="Section"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="27dp"
-        tools:layout_editor_absoluteX="324dp"
-        tools:layout_editor_absoluteY="208dp" />
 
 </android.support.constraint.ConstraintLayout>

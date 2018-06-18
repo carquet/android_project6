@@ -3,4 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="news1">#db0000</color>
+    <color name="news2">#cc4800</color>
+    <color name="news3">#00538b</color>
+    <color name="newsdefault">#ce007c</color>
 </resources>
