@@ -16,6 +16,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public final class Utils {
@@ -121,7 +122,6 @@ public final class Utils {
 
                     // Create a new {@link Event} object
                     news.add(new News(section, date, title, webUrl));
-
                 }
                 return news;
             }
