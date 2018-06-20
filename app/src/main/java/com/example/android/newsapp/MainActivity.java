@@ -2,27 +2,39 @@ package com.example.android.newsapp;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String GUARDIAN_API = "https://content.guardianapis.com/search?api-key=b8510f05-195a-4440-8030-e5f0df499deb";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_activity);
 
-        ArrayList<News> news = new ArrayList<>();
-        news.add(new News("Business","2018-06-13T15:00:17Z","Letter: Invoking the Rev Colin Morris law of TV debates","https://www.theguardian.com/politics/2018/may/10/tories-accused-of-subverting-democracy-by-not-tabling-brexit-debates"));
-        news.add(new News("environment","2018-06-13T15:00:17Z", "Recycled plastic could supply three-quarters of UK demand, report finds", "https://www.theguardian.com/environment/2018/jun/14/recycled-plastic-could-supply-three-quarters-of-uk-demand-report-finds"));
-        news.add(new News("money", "2018-05-21T11:09:14Z", "Which is the best reusable coffee cup?", "https://www.theguardian.com/money/2018/may/21/best-reusable-coffee-cup-waitrose"));
+        //Launch an async task in the background to fetch the information from the guardian API
+        NewsAsyncTask newsTask = new NewsAsyncTask();
+        newsTask.execute(GUARDIAN_API);
+
+
+    }
+
+    /**
+     * Update the UI with the given earthquake information.
+     */
+    private void updateUi(List<News> news) {
         // Find a reference to the {@link ListView} in the layout
         ListView newsListView = (ListView) findViewById(R.id.listView);
 
@@ -52,5 +64,31 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(websiteIntent);
             }
         });
+    }
+
+    //create a subclass to do the task in the background in Async
+    private class NewsAsyncTask extends AsyncTask<String, Void, List<News>> {
+
+        @Override
+        protected List<News> doInBackground(String... urls) {
+            // Don't perform the request if there are no URLs, or the first URL is null.
+            if (urls.length < 1 || urls[0] == null) {
+                return null;
+            }
+            //Get info from the API
+            // Perform the HTTP request for news data and process the response.
+            List<News> news = Utils.fetchNewsInfo(urls[0]);
+            return news;
+
+        }
+
+        @Override
+        protected void onPostExecute(List<News> news) {
+            // Update the information displayed to the user if the information exists if not return early
+            if (news == null) {
+                return;
+            }
+            updateUi(news);
+        }
     }
 }
