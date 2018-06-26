@@ -17,7 +17,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String GUARDIAN_API = "https://content.guardianapis.com/search?api-key=b8510f05-195a-4440-8030-e5f0df499deb";
+    private static final String GUARDIAN_API = "https://content.guardianapis.com/search?api-key=test";
+    private NewsAdapter adapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,35 +36,42 @@ public class MainActivity extends AppCompatActivity {
      * Update the UI with the given earthquake information.
      */
     private void updateUi(List<News> news) {
-        // Find a reference to the {@link ListView} in the layout
-        ListView newsListView = (ListView) findViewById(R.id.listView);
-
-        // Create a new adapter that takes the list of earthquakes as input
-        final NewsAdapter adapter = new NewsAdapter(this, news);
-
-        // Set the adapter on the {@link ListView}
-        // so the list can be populated in the user interface
-        newsListView.setAdapter(adapter);
-
-        // Set an item click listener on the ListView, which sends an intent to a web browser
-        // to open a website with more information about the selected earthquake.
-        newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                // Find the current news that was clicked on
-                News currentNews = adapter.getItem(position);
-
-                // Convert the String URL into a URI object (to pass into the Intent constructor)
-                Uri newsUri = Uri.parse(currentNews.getmUrl());
-                // Create a new intent to view the news URI
-                Intent websiteIntent = new Intent(Intent.ACTION_VIEW);
-                websiteIntent.setData(newsUri);
-
-                // Send the intent to launch a new activity
-                startActivity(websiteIntent);
+        if(adapter != null){
+            adapter.clear();
+            if(news != null && !news.isEmpty()){
+                adapter.addAll(news);
             }
-        });
+        } else {
+            // Find a reference to the {@link ListView} in the layout
+            ListView newsListView = (ListView) findViewById(R.id.listView);
+
+            // Create a new adapter that takes the list of earthquakes as input
+            adapter = new NewsAdapter(this, news);
+
+            // Set the adapter on the {@link ListView}
+            // so the list can be populated in the user interface
+            newsListView.setAdapter(adapter);
+
+            // Set an item click listener on the ListView, which sends an intent to a web browser
+            // to open a website with more information about the selected earthquake.
+            newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    // Find the current news that was clicked on
+                    News currentNews = adapter.getItem(position);
+
+                    // Convert the String URL into a URI object (to pass into the Intent constructor)
+                    Uri newsUri = Uri.parse(currentNews.getmUrl());
+                    // Create a new intent to view the news URI
+                    Intent websiteIntent = new Intent(Intent.ACTION_VIEW);
+                    websiteIntent.setData(newsUri);
+
+                    // Send the intent to launch a new activity
+                    startActivity(websiteIntent);
+                }
+            });
+        }
     }
 
     //create a subclass to do the task in the background in Async
@@ -92,3 +100,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
+
