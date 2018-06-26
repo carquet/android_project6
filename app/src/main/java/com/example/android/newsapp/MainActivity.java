@@ -18,7 +18,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final String GUARDIAN_API = "https://content.guardianapis.com/search?api-key=test";
-    private NewsAdapter adapter = null;
+    private NewsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
