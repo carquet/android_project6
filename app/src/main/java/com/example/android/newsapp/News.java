@@ -1,27 +1,35 @@
 package com.example.android.newsapp;
 
 public class News {
-    /**tag */
+    /**
+     * tag
+     */
     private String mSectionName;
 
-    /** Time of publication*/
+    /**
+     * Time of publication
+     */
     private String mTime;
 
-    /** Title */
+    /**
+     * Title
+     */
     private String mWebTitle;
 
-    /** Website URL of the news */
+    /**
+     * Website URL of the news
+     */
     private String mUrl;
 
     /**
      * Construct a new News object
+     *
      * @param section
      * @param time
      * @param webTitle
      * @param url
-     *
      */
-    public News(String section, String time, String webTitle, String url){
+    public News(String section, String time, String webTitle, String url) {
         mSectionName = section;
         mTime = time;
         mWebTitle = webTitle;

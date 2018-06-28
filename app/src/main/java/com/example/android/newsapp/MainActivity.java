@@ -17,11 +17,11 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>>{
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
 
     private static final String GUARDIAN_API = "https://content.guardianapis.com/search?api-key=b8510f05-195a-4440-8030-e5f0df499deb";
-    private NewsAdapter adapter;
     private static final int NEWS_LOADER_ID = 1;
+    private NewsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         //clear the adapter of previous data
         adapter.clear();
         //if there is a valid list of news , then add them to the adapter
-        if(data != null && !data.isEmpty()){
+        if (data != null && !data.isEmpty()) {
             adapter.addAll(data);
         }
 
