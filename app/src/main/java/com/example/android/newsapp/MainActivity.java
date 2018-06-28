@@ -1,6 +1,8 @@
 package com.example.android.newsapp;
 
+import android.app.LoaderManager;
 import android.content.Intent;
+import android.content.Loader;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -15,10 +17,11 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>>{
 
     private static final String GUARDIAN_API = "https://content.guardianapis.com/search?api-key=b8510f05-195a-4440-8030-e5f0df499deb";
     private NewsAdapter adapter;
+    private static final int NEWS_LOADER_ID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,38 +58,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Launch an async task in the background to fetch the information from the guardian API
-        NewsAsyncTask newsTask = new NewsAsyncTask();
-        newsTask.execute(GUARDIAN_API);
+        // Initialize the loader. Pass in the int ID constant defined above and pass in null for
+        // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
+        // because this activity implements the LoaderCallbacks interface).
+        getLoaderManager().initLoader(NEWS_LOADER_ID, null, MainActivity.this);
 
 
     }
 
-    //create a subclass to do the task in the background in Async
-    private class NewsAsyncTask extends AsyncTask<String, Void, List<News>> {
 
-        @Override
-        protected List<News> doInBackground(String... urls) {
-            // Don't perform the request if there are no URLs, or the first URL is null.
-            if (urls.length < 1 || urls[0] == null) {
-                return null;
-            }
-            //Get info from the API
-            // Perform the HTTP request for news data and process the response.
-            List<News> news = Utils.fetchNewsInfo(urls[0]);
-            return news;
+    @Override
+    public Loader<List<News>> onCreateLoader(int id, Bundle args) {
+        return new NewsLoader(this, GUARDIAN_API);
+    }
 
+    @Override
+    public void onLoadFinished(Loader<List<News>> loader, List<News> data) {
+        //clear the adapter of previous data
+        adapter.clear();
+        //if there is a valid list of news , then add them to the adapter
+        if(data != null && !data.isEmpty()){
+            adapter.addAll(data);
         }
 
-        @Override
-        protected void onPostExecute(List<News> news) {
-            //clear the adapter of previous data
-           adapter.clear();
-           //if there is a valid list of news , then add them to the adapter
-           if(news != null && !news.isEmpty()){
-               adapter.addAll(news);
-           }
-        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<News>> loader) {
+        adapter.clear();
+
     }
 }
 
