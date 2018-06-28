@@ -17,7 +17,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String GUARDIAN_API = "https://content.guardianapis.com/search?api-key=test";
+    private static final String GUARDIAN_API = "https://content.guardianapis.com/search?api-key=b8510f05-195a-4440-8030-e5f0df499deb";
     private NewsAdapter adapter;
 
     @Override
@@ -25,53 +25,41 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_activity);
 
+        // Find a reference to the {@link ListView} in the layout
+        ListView newsListView = (ListView) findViewById(R.id.listView);
+
+        // Create a new adapter that takes the list of earthquakes as input
+        adapter = new NewsAdapter(this, new ArrayList<News>());
+
+        // Set the adapter on the {@link ListView}
+        // so the list can be populated in the user interface
+        newsListView.setAdapter(adapter);
+
+        // Set an item click listener on the ListView, which sends an intent to a web browser
+        // to open a website with more information about the selected earthquake.
+        newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                // Find the current news that was clicked on
+                News currentNews = adapter.getItem(position);
+
+                // Convert the String URL into a URI object (to pass into the Intent constructor)
+                Uri newsUri = Uri.parse(currentNews.getmUrl());
+                // Create a new intent to view the news URI
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW);
+                websiteIntent.setData(newsUri);
+
+                // Send the intent to launch a new activity
+                startActivity(websiteIntent);
+            }
+        });
+
         //Launch an async task in the background to fetch the information from the guardian API
         NewsAsyncTask newsTask = new NewsAsyncTask();
         newsTask.execute(GUARDIAN_API);
 
 
-    }
-
-    /**
-     * Update the UI with the given earthquake information.
-     */
-    private void updateUi(List<News> news) {
-        if(adapter != null){
-            adapter.clear();
-            if(news != null && !news.isEmpty()){
-                adapter.addAll(news);
-            }
-        } else {
-            // Find a reference to the {@link ListView} in the layout
-            ListView newsListView = (ListView) findViewById(R.id.listView);
-
-            // Create a new adapter that takes the list of earthquakes as input
-            adapter = new NewsAdapter(this, news);
-
-            // Set the adapter on the {@link ListView}
-            // so the list can be populated in the user interface
-            newsListView.setAdapter(adapter);
-
-            // Set an item click listener on the ListView, which sends an intent to a web browser
-            // to open a website with more information about the selected earthquake.
-            newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                    // Find the current news that was clicked on
-                    News currentNews = adapter.getItem(position);
-
-                    // Convert the String URL into a URI object (to pass into the Intent constructor)
-                    Uri newsUri = Uri.parse(currentNews.getmUrl());
-                    // Create a new intent to view the news URI
-                    Intent websiteIntent = new Intent(Intent.ACTION_VIEW);
-                    websiteIntent.setData(newsUri);
-
-                    // Send the intent to launch a new activity
-                    startActivity(websiteIntent);
-                }
-            });
-        }
     }
 
     //create a subclass to do the task in the background in Async
@@ -92,11 +80,12 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<News> news) {
-            // Update the information displayed to the user if the information exists if not return early
-            if (news == null) {
-                return;
-            }
-            updateUi(news);
+            //clear the adapter of previous data
+           adapter.clear();
+           //if there is a valid list of news , then add them to the adapter
+           if(news != null && !news.isEmpty()){
+               adapter.addAll(news);
+           }
         }
     }
 }
