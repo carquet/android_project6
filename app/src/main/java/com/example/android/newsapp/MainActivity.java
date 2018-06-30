@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.net.URI;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final int NEWS_LOADER_ID = 1;
     private NewsAdapter adapter;
     private TextView emptyView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> data) {
+        //hide the loading indicator when the search is finished
+        ProgressBar progressBar = findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.GONE);
+
         // Set empty state text to display "No news found."
         emptyView.setText(R.string.no_news);
         //clear the adapter of previous data
