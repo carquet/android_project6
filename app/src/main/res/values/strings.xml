@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">News App</string>
+    <!-- Text to display in the list when there are no earthquakes [CHAR LIMIT=NONE] -->
+    <string name="no_news">No news found.</string>
 </resources>

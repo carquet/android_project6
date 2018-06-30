@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final String GUARDIAN_API = "https://content.guardianapis.com/search?api-key=b8510f05-195a-4440-8030-e5f0df499deb";
     private static final int NEWS_LOADER_ID = 1;
     private NewsAdapter adapter;
+    private TextView emptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
         newsListView.setAdapter(adapter);
+
+        //setting the empty view
+        emptyView = (TextView) findViewById(R.id.empty_view);
+        newsListView.setEmptyView(emptyView);
 
         // Set an item click listener on the ListView, which sends an intent to a web browser
         // to open a website with more information about the selected earthquake.
@@ -74,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> data) {
+        // Set empty state text to display "No news found."
+        emptyView.setText(R.string.no_news);
         //clear the adapter of previous data
         adapter.clear();
         //if there is a valid list of news , then add them to the adapter
