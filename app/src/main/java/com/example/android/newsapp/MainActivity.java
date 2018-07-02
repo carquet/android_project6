@@ -19,7 +19,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
 
-    private static final String GUARDIAN_API = "https://content.guardianapis.com/search?api-key=b8510f05-195a-4440-8030-e5f0df499deb";
+    private static final String GUARDIAN_API = "https://content.guardianapis.com/search?api-key=test";
     private static final int NEWS_LOADER_ID = 1;
     private NewsAdapter adapter;
 
