@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -38,23 +39,23 @@ public class NewsAdapter extends ArrayAdapter<News> {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
         }
 
-        // Find the earthquake at the given position in the list of earthquakes
+        // Find the news in the current position of news
         News currentNews = getItem(position);
 
-        //TITLE
+        /**TITLE*/
         // Find the TextView with view ID title
         TextView titleView = (TextView) listItemView.findViewById(R.id.title);
         String title = currentNews.getmWebTitle();
         // Display the title of the current news in that TextView
         titleView.setText(title);
 
-        //TIME
+        /**TIME*/
         TextView timeView = (TextView) listItemView.findViewById(R.id.time);
         String time = currentNews.getmTime();
         timeView.setText(time);
 
 
-        //SECTION
+        /**SECTION*/
         TextView sectionView = (TextView) listItemView.findViewById(R.id.section);
         String section = currentNews.getmSectionName();
         sectionView.setText(section);
@@ -63,6 +64,19 @@ public class NewsAdapter extends ArrayAdapter<News> {
         int sectionColor = getSectionColor(currentNews.getmSectionName());
         sectionBubble.setColor(sectionColor);
 
+        /**NAME OF THE AUTHOR*/
+        //Evaluate whether there is a name or not
+        TextView authorView = (TextView) listItemView.findViewById(R.id.author);
+        // Check if a name is provided for this news or not
+        if (currentNews.hasName()) {
+            // If a name is available, display the provided name
+            authorView.setText(currentNews.getmAuthor());
+            // Make sure the view is visible
+            authorView.setVisibility(View.VISIBLE);
+        } else {
+            // Otherwise hide the ImageView (set visibility to GONE)
+            authorView.setVisibility(View.GONE);
+        }
         return listItemView;
     }
 
