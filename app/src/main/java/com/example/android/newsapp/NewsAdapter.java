@@ -15,6 +15,11 @@ import android.widget.TextView;
 import java.util.List;
 
 public class NewsAdapter extends ArrayAdapter<News> {
+    /**
+     * The part of the time string from the Guardion service that we use to display only the date
+     * ("2018-06-30T20:39:00Z").
+     */
+    private static final String DATE_SEPARATOR = "T";
 
     /**
      * Constructs a new {@link NewsAdapter}.
@@ -49,10 +54,26 @@ public class NewsAdapter extends ArrayAdapter<News> {
         // Display the title of the current news in that TextView
         titleView.setText(title);
 
-        /**TIME*/
-        TextView timeView = (TextView) listItemView.findViewById(R.id.time);
-        String time = currentNews.getmTime();
-        timeView.setText(time);
+        /**DATE OF PUBLICATION*/
+        TextView timeView = (TextView) listItemView.findViewById(R.id.date);
+        // The original time string (i.e. "2018-06-30T20:39:00Z") contains
+        // a separator T between date and time then store the date separately from the time in 2 Strings,
+        // so only the date can be displayed
+        String originalTime = currentNews.getmTime();
+        String datePublication;
+        // Check whether the currentNews string contains the " T " text
+        if (originalTime.contains(DATE_SEPARATOR)) {
+            // Split the string into different parts (as an array of Strings)
+            // based on the " T " text. We expect an array of 2 Strings, where
+            // the first String will be "2018-06-30" and the second String will be "20:39:00Z".
+            String[] parts = originalTime.split(DATE_SEPARATOR);
+            // date should be "2018-06-30 " + " T " --> "2018-06-30T"
+            datePublication = parts[0];
+            // Primary location should be "Cairo, Egypt"
+            timeView.setText(datePublication);
+        }
+
+
 
 
         /**SECTION*/
