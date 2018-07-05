@@ -16,7 +16,7 @@ import java.util.List;
 
 public class NewsAdapter extends ArrayAdapter<News> {
     /**
-     * The part of the time string from the Guardion service that we use to display only the date
+     * The part of the time string from the Guardian service that we use to display only the date
      * ("2018-06-30T20:39:00Z").
      */
     private static final String DATE_SEPARATOR = "T";
@@ -25,15 +25,15 @@ public class NewsAdapter extends ArrayAdapter<News> {
      * Constructs a new {@link NewsAdapter}.
      *
      * @param context of the app
-     * @param news    is the list of earthquakes, which is the data source of the adapter
+     * @param news    is the list of news, which is the data source of the adapter
      */
     public NewsAdapter(Context context, List<News> news) {
         super(context, 0, news);
     }
 
     /**
-     * Returns a list item view that displays information about the earthquake at the given position
-     * in the list of earthquakes.
+     * Returns a list item view that displays information about the piece of news at the given position
+     * in the list of news.
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -58,7 +58,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
         TextView timeView = (TextView) listItemView.findViewById(R.id.date);
         // The original time string (i.e. "2018-06-30T20:39:00Z") contains
         // a separator T between date and time then store the date separately from the time in 2 Strings,
-        // so only the date can be displayed
+        // so only the date can be displayed and time if needed in the future
         String originalTime = currentNews.getmTime();
         String datePublication;
         // Check whether the currentNews string contains the " T " text
@@ -67,9 +67,8 @@ public class NewsAdapter extends ArrayAdapter<News> {
             // based on the " T " text. We expect an array of 2 Strings, where
             // the first String will be "2018-06-30" and the second String will be "20:39:00Z".
             String[] parts = originalTime.split(DATE_SEPARATOR);
-            // date should be "2018-06-30 " + " T " --> "2018-06-30T"
+            // date should be "2018-06-30 " without " T " --> "2018-06-30"
             datePublication = parts[0];
-            // Primary location should be "Cairo, Egypt"
             timeView.setText(datePublication);
         }
 
@@ -112,7 +111,6 @@ public class NewsAdapter extends ArrayAdapter<News> {
             case "politics":
                 sectionColorResourceId = R.color.news3;
                 break;
-
             default:
                 sectionColorResourceId = R.color.newsdefault;
                 break;

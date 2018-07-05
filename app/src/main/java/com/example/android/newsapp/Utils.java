@@ -41,12 +41,9 @@ public final class Utils {
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
-
         //3.parse JSON
         // Extract relevant fields from the JSON response and create an {@link News} object
-        List<News> newsExtracted = extractFromJson(jsonResponse);
-
-        return newsExtracted;
+        return extractFromJson(jsonResponse);
     }
 
     /**

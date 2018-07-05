@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         emptyView = (TextView) findViewById(R.id.empty_view);
         newsListView.setEmptyView(emptyView);
 
-        // Create a new adapter that takes the list of earthquakes as input
+        // Create a new adapter that takes the list of news as input
         adapter = new NewsAdapter(this, new ArrayList<News>());
 
         // Set the adapter on the {@link ListView}

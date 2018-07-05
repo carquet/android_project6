@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!-- Layout for a single list item that displays an earthquake -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,35 +14,35 @@
         android:layout_weight="3"
         android:background="@drawable/tag_bubble"
         android:gravity="center"
-        android:text="Section"
         android:textAllCaps="true"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        tools:text="@string/section" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_marginLeft="10dp">
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_marginBottom="100dp"
-            android:text="DATE" />
+            tools:text="@string/date" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:textAllCaps="true"
+            android:textSize="15sp"
             android:textStyle="bold"
-            android:text="TITLE" />
+            tools:text="@string/title" />
 
         <TextView
             android:id="@+id/author"
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:textStyle="italic"
-            android:text="AUTHOR" />
+            tools:text="@string/author" />
 
 
     </RelativeLayout>

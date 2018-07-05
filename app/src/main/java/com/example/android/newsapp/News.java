@@ -25,7 +25,9 @@ public class News {
      */
     private String mUrl;
 
-    //name of the contributo
+    /**
+     * name of the article's author
+     */
     private String mAuthor;
 
     /**
@@ -46,7 +48,7 @@ public class News {
 
     }
 
-
+    //getters methods
     public String getmSectionName() {
         return mSectionName;
     }
