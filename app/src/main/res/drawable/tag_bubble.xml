@@ -6,13 +6,14 @@
         android:bottomRightRadius="10dp"
         android:radius="40dp" />
 
+
     <!--If your shape requires only one solid color-->
     <solid
         android:color="@color/colorPrimary" />
 
     <size
-        android:width="85dp"
-        android:height="85dp" />
+        android:width="90dp"
+        android:height="90dp" />
 
     <!--Use android:dashWidth="2dp" and android:dashGap="2dp"
     to add dashes to your stroke-->

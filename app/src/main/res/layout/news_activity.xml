@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@color/colorAccent"
-        android:dividerHeight="2dp">
+        android:dividerHeight="1dp">
     </ListView>
     <!-- Empty view is only visible when the list has no items. -->
     <TextView
