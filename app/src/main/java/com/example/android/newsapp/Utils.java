@@ -122,19 +122,18 @@ public final class Utils {
 
                     //check for author's name
                     JSONArray tagArray = firstNews.getJSONArray("tags");
-                    if(tagArray.length() > 0){
-                        for(int i = 0; tagArray.length() > i; i++){
+                    if (tagArray.length() > 0) {
+                        for (int i = 0; tagArray.length() > i; i++) {
                             JSONObject contributor = tagArray.getJSONObject(i);
                             //extract the author's name
                             String authorName = contributor.getString("webTitle");
                             news.add(new News(section, date, title, webUrl, authorName));
                         }
 
-                    }else{
+                    } else {
                         // Create a new {@link Event} object
                         news.add(new News(section, date, title, webUrl, ""));
                     }
-
 
                 }
                 return news;

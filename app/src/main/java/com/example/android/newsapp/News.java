@@ -4,7 +4,7 @@ public class News {
     /**
      * Constant value that represents no name was provided for this article
      */
-    private static final String  NO_NAME_PROVIDED = "";
+    private static final String NO_NAME_PROVIDED = "";
     /**
      * tag
      */
@@ -67,7 +67,8 @@ public class News {
         return mAuthor;
     }
 
-    public boolean hasName(){
+    //checks whether the author's name exists
+    public boolean hasName() {
         return mAuthor != NO_NAME_PROVIDED;
     }
 }

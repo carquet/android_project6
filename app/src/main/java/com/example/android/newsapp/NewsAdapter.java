@@ -74,8 +74,6 @@ public class NewsAdapter extends ArrayAdapter<News> {
         }
 
 
-
-
         /**SECTION*/
         TextView sectionView = (TextView) listItemView.findViewById(R.id.section);
         String section = currentNews.getmSectionName();
