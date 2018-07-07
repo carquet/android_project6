@@ -9,4 +9,7 @@
     <string name="date">date</string>
     <string name="title">title</string>
     <string name="author">author</string>
+    <!-- MENU -->
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">News Settings</string>
 </resources>
