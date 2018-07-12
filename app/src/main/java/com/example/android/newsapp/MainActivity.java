@@ -107,9 +107,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         // getString retrieves a String value from the preferences. The second parameter is the default value for this preference.
-        String orderBy = sharedPrefs.getString(
-                getString(R.string.settings_order_by_key),
-                getString(R.string.settings_order_by_default));
+        //String orderBy = sharedPrefs.getString(
+         //       getString(R.string.settings_order_by_key),
+         //       getString(R.string.settings_order_by_default));
+        String section = sharedPrefs.getString(
+                getString(R.string.settings_section_key),
+                getString(R.string.settings_section_label));
 
         // parse breaks apart the URI string that's passed into its parameter
         Uri baseUri = Uri.parse(GUARDIAN_API);
@@ -119,10 +122,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
 //"https://content.guardianapis.com/search?use-date=published&show-tags=contributor&q=education&api-key=b8510f05-195a-4440-8030-e5f0df499deb"
         // Append query parameter and its value. For example, the `format=geojson`
-        uriBuilder.appendQueryParameter("use-date", "published");
+        //uriBuilder.appendQueryParameter("use-date", "published");
         uriBuilder.appendQueryParameter("show-tags", "contributor");
-        uriBuilder.appendQueryParameter("q", "education"); //football, business, etc
-        uriBuilder.appendQueryParameter("order-by", orderBy);
+        uriBuilder.appendQueryParameter("section", section); //football, business, etc
+       // uriBuilder.appendQueryParameter("order-by", orderBy);
         uriBuilder.appendQueryParameter("api-key", "b8510f05-195a-4440-8030-e5f0df499deb");
 
         // Return the completed uri `"https://content.guardianapis.com/search?use-date=published&show-tags=contributor&q=education&api-key=b8510f05-195a-4440-8030-e5f0df499deb
