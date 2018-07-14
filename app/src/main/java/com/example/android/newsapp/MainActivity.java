@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
          //       getString(R.string.settings_order_by_default));
         String section = sharedPrefs.getString(
                 getString(R.string.settings_section_key),
-                getString(R.string.settings_section_label));
+                getString(R.string.settings_section_default));
 
         // parse breaks apart the URI string that's passed into its parameter
         Uri baseUri = Uri.parse(GUARDIAN_API);
@@ -120,15 +120,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-//"https://content.guardianapis.com/search?use-date=published&show-tags=contributor&q=education&api-key=b8510f05-195a-4440-8030-e5f0df499deb"
-        // Append query parameter and its value. For example, the `format=geojson`
+//"https://content.guardianapis.com/search?use-date=published&show-tags=contributor&section=education&api-key=b8510f05-195a-4440-8030-e5f0df499deb"
+        // Append query parameter and its value. For example, the `format=gjson`
         //uriBuilder.appendQueryParameter("use-date", "published");
         uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("section", section); //football, business, etc
-       // uriBuilder.appendQueryParameter("order-by", orderBy);
         uriBuilder.appendQueryParameter("api-key", "b8510f05-195a-4440-8030-e5f0df499deb");
 
-        // Return the completed uri `"https://content.guardianapis.com/search?use-date=published&show-tags=contributor&q=education&api-key=b8510f05-195a-4440-8030-e5f0df499deb
+        // Return the completed uri `"https://content.guardianapis.com/search?show-tags=contributor&section=education&api-key=myapikey
         return new NewsLoader(this, uriBuilder.toString());
     }
 

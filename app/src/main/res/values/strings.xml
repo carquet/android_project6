@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">News App</string>
     <!-- Text to display in the list when there are no earthquakes [CHAR LIMIT=NONE] -->
-    <string name="no_news">Nothing new to report at the moment.\nCome back later for more news.</string>
+    <string name="no_news">Nothing new to report at the moment.\nMake sure you select your section in the settings or \nCome back later for more news.</string>
     <!-- Error message when there is no internet connectivity [CHAR LIMIT=NONE] -->
     <string name="no_internet_connection">No internet connection.</string>
     <!-- list view text placeholders-->
@@ -13,23 +13,11 @@
     <string name="settings_menu_item">Settings</string>
     <string name="settings_title">News Settings</string>
 
-    <!-- ###########Strings for ORDER BY preference############# -->
-    <!--<string name="settings_order_by_label">Order By</string>-->
-    <!--<string name="settings_order_by_key" translatable="false">seeeection</string>-->
-    <!--<string name="settings_order_by_default" translatable="false">@string/settings_section_football_label</string>-->
-    <!-- Label for order_by most recent
-    <string name="settings_order_by_most_recent_value">newest</string>
-    <string name="settings_order_by_most_recent_label">Newest</string>
-    -->
-    <!-- Label for order_by oldest
-    <string name="settings_order_by_oldest_value">oldest</string>
-    <string name="settings_order_by_oldest_label">Oldest</string>
-    -->
 
     <!-- ##############Strings for SECTION preference#############-->
     <string name="settings_section_label">Choose section</string>
-    <string name="settings_section_key" translatable="false">order_by</string>
-    <string name="settings_section_default" translatable="false">@string/settings_section_news_label</string>
+    <string name="settings_section_key" translatable="false">section</string>
+    <string name="settings_section_default" translatable="false">@string/settings_section_business_value</string>
 
     <!-- Label for EDUCATION section -->
     <string name="settings_section_education_value">education</string>
