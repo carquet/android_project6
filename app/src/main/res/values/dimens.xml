@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- list_item.xml -->
+    <dimen name="listItem_mainLayout_padding">15dp</dimen>
+    <dimen name="listItem_relativelayout_margin_left">10dp</dimen>
+    <dimen name="listItem_date_margin_bottom">100dp</dimen>
+    <dimen name="listItem_title_textsize">15sp</dimen>
+    <!-- news_activity.xml -->
+    <dimen name="newsActivity_listView_divider">1dp</dimen>
+    <dimen name="newsActivity_emptyView_padding">20dp</dimen>
+
+</resources>

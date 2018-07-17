@@ -108,7 +108,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
             case "education":
                 sectionColorResourceId = R.color.news2;
                 break;
-            case "politics":
+            case "football":
                 sectionColorResourceId = R.color.news3;
                 break;
             default:

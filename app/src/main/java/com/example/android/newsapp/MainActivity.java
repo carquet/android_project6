@@ -4,13 +4,17 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -23,8 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
-
-    private static final String GUARDIAN_API = "https://content.guardianapis.com/search?use-date=published&show-tags=contributor&q=education&api-key=b8510f05-195a-4440-8030-e5f0df499deb";
+    //"https://content.guardianapis.com/search?use-date=published&show-tags=contributor&q=education&api-key=b8510f05-195a-4440-8030-e5f0df499deb"
+    private static final String GUARDIAN_API = "https://content.guardianapis.com/search";
     private static final int NEWS_LOADER_ID = 1;
     private NewsAdapter adapter;
     private TextView emptyView;
@@ -99,7 +103,27 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<List<News>> onCreateLoader(int id, Bundle args) {
-        return new NewsLoader(this, GUARDIAN_API);
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // getString retrieves a String value from the preferences. The second parameter is the default value for this preference.
+        //String orderBy = sharedPrefs.getString(
+        String section = sharedPrefs.getString(getString(R.string.settings_section_key), getString(R.string.settings_section_default));
+
+        // parse breaks apart the URI string that's passed into its parameter
+        Uri baseUri = Uri.parse(GUARDIAN_API);
+
+        // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        //"https://content.guardianapis.com/search?use-date=published&show-tags=contributor&section=education&api-key=b8510f05-195a-4440-8030-e5f0df499deb"
+        // Append query parameter and its value. For example, the `format=gjson`
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
+        uriBuilder.appendQueryParameter("section", section); //football, business, etc
+        uriBuilder.appendQueryParameter("api-key", "b8510f05-195a-4440-8030-e5f0df499deb");
+
+        // Return the completed uri `"https://content.guardianapis.com/search?show-tags=contributor&section={preference}&api-key=myapikey
+        return new NewsLoader(this, uriBuilder.toString());
     }
 
     @Override
@@ -123,6 +147,27 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoaderReset(Loader<List<News>> loader) {
         adapter.clear();
 
+    }
+
+    @Override
+    // This method initialize the contents of the Activity's options menu.
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the Options Menu we specified in XML
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    //A. this method passes the menu item that is selected
+    //B. An potions Menu may have more than one item: to determined which one we call getItemID
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

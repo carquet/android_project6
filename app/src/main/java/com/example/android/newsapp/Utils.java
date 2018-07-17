@@ -108,10 +108,10 @@ public final class Utils {
             // If there are results in the features array
             if (resultsArray.length() > 0) {
                 for (int index = 0; resultsArray.length() > index; index++) {
-                    // Extract out the first feature (which is an earthquake)
+                    // Extract out the first feature (which is a news)
                     JSONObject firstNews = resultsArray.getJSONObject(index);
 
-                    // Extract out the title, number of people, and perceived strength values
+                    // Extract out section, date, title and weburl
                     String section = firstNews.getString("sectionName");
                     String date = firstNews.getString("webPublicationDate");
                     String title = firstNews.getString("webTitle");
