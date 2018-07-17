@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
-//"https://content.guardianapis.com/search?use-date=published&show-tags=contributor&q=education&api-key=b8510f05-195a-4440-8030-e5f0df499deb"
+    //"https://content.guardianapis.com/search?use-date=published&show-tags=contributor&q=education&api-key=b8510f05-195a-4440-8030-e5f0df499deb"
     private static final String GUARDIAN_API = "https://content.guardianapis.com/search";
     private static final int NEWS_LOADER_ID = 1;
     private NewsAdapter adapter;
@@ -108,11 +108,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         // getString retrieves a String value from the preferences. The second parameter is the default value for this preference.
         //String orderBy = sharedPrefs.getString(
-         //       getString(R.string.settings_order_by_key),
-         //       getString(R.string.settings_order_by_default));
-        String section = sharedPrefs.getString(
-                getString(R.string.settings_section_key),
-                getString(R.string.settings_section_default));
+        String section = sharedPrefs.getString(getString(R.string.settings_section_key), getString(R.string.settings_section_default));
 
         // parse breaks apart the URI string that's passed into its parameter
         Uri baseUri = Uri.parse(GUARDIAN_API);
@@ -120,14 +116,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-//"https://content.guardianapis.com/search?use-date=published&show-tags=contributor&section=education&api-key=b8510f05-195a-4440-8030-e5f0df499deb"
+        //"https://content.guardianapis.com/search?use-date=published&show-tags=contributor&section=education&api-key=b8510f05-195a-4440-8030-e5f0df499deb"
         // Append query parameter and its value. For example, the `format=gjson`
-        //uriBuilder.appendQueryParameter("use-date", "published");
         uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("section", section); //football, business, etc
         uriBuilder.appendQueryParameter("api-key", "b8510f05-195a-4440-8030-e5f0df499deb");
 
-        // Return the completed uri `"https://content.guardianapis.com/search?show-tags=contributor&section=education&api-key=myapikey
+        // Return the completed uri `"https://content.guardianapis.com/search?show-tags=contributor&section={preference}&api-key=myapikey
         return new NewsLoader(this, uriBuilder.toString());
     }
 
@@ -162,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return true;
     }
 
-    //A. this method passes the menuitem that is selected
+    //A. this method passes the menu item that is selected
     //B. An potions Menu may have more than one item: to determined which one we call getItemID
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

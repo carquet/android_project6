@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">News App</string>
-    <!-- Text to display in the list when there are no earthquakes [CHAR LIMIT=NONE] -->
-    <string name="no_news">Nothing new to report at the moment.\nMake sure you select your section in the settings or \nCome back later for more news.</string>
+    <!-- Text to display in the list when there are no news to be displayed -->
+    <string name="no_news">Nothing new to report at the moment.\nMake sure you select your section in the settings \nor \nCome back later for more news.</string>
     <!-- Error message when there is no internet connectivity [CHAR LIMIT=NONE] -->
     <string name="no_internet_connection">No internet connection.</string>
     <!-- list view text placeholders-->
@@ -9,29 +9,25 @@
     <string name="date">date</string>
     <string name="title">title</string>
     <string name="author">author</string>
+
     <!-- MENU -->
     <string name="settings_menu_item">Settings</string>
     <string name="settings_title">News Settings</string>
-
 
     <!-- ##############Strings for SECTION preference#############-->
     <string name="settings_section_label">Choose section</string>
     <string name="settings_section_key" translatable="false">section</string>
     <string name="settings_section_default" translatable="false">@string/settings_section_business_value</string>
-
-    <!-- Label for EDUCATION section -->
+    <!--  EDUCATION section -->
     <string name="settings_section_education_value">education</string>
     <string name="settings_section_education_label">Education</string>
-
-    <!-- Label for FOOTBALL section -->
+    <!-- FOOTBALL section -->
     <string name="settings_section_football_value">football</string>
     <string name="settings_section_football_label">Football</string>
-
-    <!-- Label for BUSINESS section -->
+    <!-- BUSINESS section -->
     <string name="settings_section_business_value">business</string>
     <string name="settings_section_business_label">Business</string>
-
-    <!-- Label for NEWS section -->
+    <!-- NEWS section -->
     <string name="settings_section_news_value">news</string>
     <string name="settings_section_news_label">News</string>
 

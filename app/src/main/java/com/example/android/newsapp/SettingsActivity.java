@@ -17,9 +17,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
-    public static class NewsPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener{
+    public static class NewsPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
         @Override
-        public void onCreate(Bundle savedInstance){
+        public void onCreate(Bundle savedInstance) {
             super.onCreate(savedInstance);
             addPreferencesFromResource(R.xml.settings_main);
             Preference section = findPreference(getString(R.string.settings_section_key));
@@ -44,10 +44,10 @@ public class SettingsActivity extends AppCompatActivity {
                 if (prefIndex >= 0) {
                     CharSequence[] labels = listPreference.getEntries();
                     preference.setSummary(labels[prefIndex]);
-                    }
-                } else {
-                preference.setSummary(stringValue);
                 }
+            } else {
+                preference.setSummary(stringValue);
+            }
             return true;
         }
     }

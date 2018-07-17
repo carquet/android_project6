@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@color/colorAccent"
-        android:dividerHeight="1dp">
+        android:dividerHeight="@dimen/newsActivity_listView_divider">
     </ListView>
     <!-- Empty view is only visible when the list has no items or when searching for connection -->
     <TextView
@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:padding="5dp"
+        android:padding="@dimen/newsActivity_emptyView_padding"
         android:textAppearance="?android:textAppearanceMedium"
         tools:text="@string/no_news"/>
     <!-- Progress bar to be visible while waiting for upload-->
